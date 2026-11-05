@@ -1,0 +1,8 @@
+criterion,column,direction,transform,cap,description,rationale
+demand,pop_2030,benefit,log_cap,4000,Projected 2030 population of the service area (log; saturates at 4000),More customers spread fixed costs but returns flatten: ESMAP typical 3rd-generation mini-grid serves 800-4000 people; very large towns are grid-extension candidates
+compactness,peak_density,benefit,log,,People in the densest 1 km cell,Compact village cores need less distribution network per customer
+remoteness,grid_km,benefit,linear_cap,50,Distance to the existing transmission grid (km; capped),Far from the grid = grid extension is costly; capped so extreme remoteness is not over-rewarded
+grid_risk,planned_km,benefit,linear_cap,30,Distance to the future grid: nearest existing OR planned line (km; capped),Lower risk that the main grid arrives and strands the asset
+solar,ghi,benefit,minmax,,Global horizontal irradiation (kWh/m2/yr),More energy per installed kWp
+access,road_km,cost,linear_cap,20,Distance to the nearest road (km; capped),Construction logistics and O&M access
+need,poverty_index,benefit,minmax,,LGA poverty index (0-1; World Bank/KTH tool),Equity lens: prioritise poorer areas (optional; definition/year undocumented)
