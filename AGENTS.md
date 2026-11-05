@@ -42,3 +42,6 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/*.ipynb
 
 ## Commit conventions
 `feat:`, `fix:`, `docs:`, `data:`, `test:`, `refactor:`, `chore:`.
+
+## Git attribution
+Never add `Co-Authored-By`, `Claude-Session` or other AI attribution lines to commits or PRs (see CLAUDE.md).
