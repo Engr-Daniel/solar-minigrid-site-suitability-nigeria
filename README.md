@@ -3,7 +3,7 @@
 [![tests](https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria/actions/workflows/tests.yml/badge.svg)](https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
-📊 Live dashboard: *coming soon* · 📓 [Analysis notebook](notebooks/01_site_suitability.ipynb) · 📐 [Methodology](docs/methodology.md)
+📊 **[Live dashboard](https://solar-minigrid-site-suitability-nigeria.streamlit.app/)** · 📓 [Analysis notebook](notebooks/01_site_suitability.ipynb) · 📐 [Methodology](docs/methodology.md)
 
 **Where should Nigeria build its next solar mini-grids?** This project ranks **191,316 populated hexagons (~5 km² each)** for village-scale solar mini-grids. It uses multi-criteria decision analysis (MCDA) on population, distance to the grid, road access and solar resource, then tests how robust the ranking is and estimates site economics.
 
@@ -46,8 +46,17 @@ Full details: [docs/methodology.md](docs/methodology.md).
 ![Input layers](reports/figures/02_criteria_layers.png)
 
 ## 🖥️ Dashboard
-Filter by state, change the screen and weights, see the map and shortlist update, inspect any site, and check robustness and the benchmark.
-![Dashboard](reports/figures/dashboard.png)
+**[Open the live dashboard →](https://solar-minigrid-site-suitability-nigeria.streamlit.app/)** It's built as a stakeholder presentation and works on desktop and mobile:
+- **Executive summary:** headline, KPIs, suitability map, top 10 sites, key findings and recommended next steps
+- **Investment case:** solar vs diesel cost, people reached per dollar, phased roll-out tranches, investment by state
+- **Site explorer:** ranked shortlist (click a row) → site profile, criterion scores, site facts and local map
+- **Robustness & benchmark:** weight Monte Carlo, agreement between stakeholder lenses, OnSSET-2016 comparison
+- **Briefing note:** a one-click printable HTML brief (print to PDF) for the current scenario
+
+<p float="left">
+  <img src="reports/figures/dashboard.png" width="74%" />
+  <img src="reports/figures/dashboard_mobile.png" width="24%" />
+</p>
 
 ## 🗂️ Structure
 ```
