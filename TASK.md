@@ -13,7 +13,8 @@ Status: `[x]` done · `[ ]` to do
 - [x] README, methodology, AGENTS, MEMORY, TASK
 
 ## 🚀 Phase 2: Publish
-- [ ] Deploy to Streamlit Community Cloud (main file `app/streamlit_app.py`) and add the URL to the README *(you)*
+- [x] Deploy to Streamlit Community Cloud: https://solar-minigrid-site-suitability-nigeria.streamlit.app/
+- [x] Stakeholder-presentation redesign (executive summary, investment case, site explorer, briefing note, mobile layout)
 - [ ] Make the repo public and pin it *(you)*
 - [ ] LinkedIn post
 

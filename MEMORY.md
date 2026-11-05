@@ -17,6 +17,8 @@ Long-term project memory: context, decisions and lessons. Newest decisions first
 ## Decision log
 | Date | Decision | Reason |
 |---|---|---|
+| 2026-11-05 | Dashboard restructured as a stakeholder deck: Executive summary → Investment case → Site explorer → Robustness → Method; printable briefing note | Owner asked for presentation-grade, professional view |
+| 2026-11-05 | Mobile: KPI CSS grid (2-up), sidebar `auto`, map zoom/height switched by User-Agent (`st.context.headers`) | pydeck has no fit-bounds; Streamlit columns stack on phones |
 | 2026-11-05 | Core data = World Bank/KTH OnSSET Nigeria 1 km cells (566-<state>.json; LGA files are subsets) | Open, MIT, consistent national layer with population, grid/road distance and GHI. Vintage 2016 is disclosed |
 | 2026-11-05 | Spatial unit = H3 res 7 (~5 km²) | Connected components of 1 km cells merged rural belts into 55M-person "settlements" |
 | 2026-11-05 | Default screen 800–10,000 people, ≤50% urban, ≥5 km from grid | ESMAP typical mini-grid 800–4,000 people; village scale |
@@ -27,6 +29,8 @@ Long-term project memory: context, decisions and lessons. Newest decisions first
 | 2026-11-05 | Poverty index weight 0 by default | Definition and year undocumented in the source |
 
 ## Lessons learned
+- Streamlit columns stack on phones; render KPI rows as one HTML CSS grid instead of `st.columns`.
+- `$` in `st.markdown` text needs `\\$` (LaTeX); inside raw HTML blocks it's safe.
 - pydeck needs plain Python ints in colour lists; NumPy ints render grey.
 - `git ls-tree -l` on a blob-less partial clone fetches every blob. Use `--name-only`, then check out only the needed paths.
 - Validation against an external model surfaced a real modelling bias (size-chasing). Always benchmark.
