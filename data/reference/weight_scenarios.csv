@@ -1,0 +1,4 @@
+scenario,demand,compactness,remoteness,grid_risk,solar,access,need,description
+Balanced,0.25,0.15,0.20,0.15,0.10,0.15,0.00,Default: equal emphasis on market size and siting risk
+Developer (commercial),0.35,0.20,0.15,0.15,0.05,0.10,0.00,What a private developer optimises: customers per site and low build cost
+Access & equity,0.15,0.10,0.25,0.10,0.05,0.10,0.25,What an agency like REA optimises: unserved and poorer communities
