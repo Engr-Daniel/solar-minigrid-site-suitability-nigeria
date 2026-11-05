@@ -1,0 +1,10 @@
+# Data pipeline, figures, notebooks and tests.
+-r requirements.txt
+geopandas>=1.0
+pyogrio>=0.7
+shapely>=2.0
+matplotlib>=3.8
+pytest>=8.0
+jupyter>=1.0
+nbconvert>=7.0
+ipykernel>=6.0

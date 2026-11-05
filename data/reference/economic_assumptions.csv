@@ -1,0 +1,16 @@
+parameter,value,unit,low,high,source,notes
+household_size,5.42,persons per household,,,"NBS Nigeria Living Standards Survey 2020 (rural average)",Urban 4.50; national 5.06
+uptake,0.70,share of households connecting,0.5,0.9,Assumption,Not every household connects in the first years
+tier_kwh,365,kWh per household per year,73,1250,"World Bank Multi-Tier Framework: Tier 3 threshold (>=365 kWh/yr)",Tier 2 = 73; Tier 4 = 1250
+productive_uplift,0.30,share added for productive & community use,0.1,0.6,Assumption,Mills shops clinics schools
+performance_ratio,0.75,PV system performance ratio incl. battery losses,0.65,0.80,Assumption,Specific yield = GHI x PR (kWh/kWp/yr)
+generation_capex_per_kwp,1200,USD per kWp (PV + ~1.5 kWh battery + inverters + BOS),900,1800,"Assumption derived from ESMAP (2019) component costs (PV $690/kWp; Li-ion $598/kWh; inverter $264/kW = ~$1850/kWp incl. 1.5 kWh/kWp storage) and ~35% cost decline since",Check: total capex per connection should fall in ESMAP's US$500-2100 range
+distribution_capex_per_connection,450,USD per connection (network + meter + soft costs),300,700,"Assumption; within ESMAP (2019) US$500-2100 total upfront cost per connection when combined with generation",
+om_share,0.04,share of capex per year,0.02,0.06,Assumption,O&M incl. battery replacement reserve
+discount_rate,0.10,real,0.08,0.15,Assumption,
+lifetime_years,20,years,,,"SEforALL Nigeria IEP geospatial model uses 20-year lifetime cost per connection",
+grant_per_connection,350,USD per connection,,,"SEforALL Nigeria IEP (2022): USD 350/connection subsidy (NEP performance-based grant)",
+diesel_lcoe_low,0.35,USD/kWh,,,"SEforALL Nigeria IEP (2022): diesel generation LCOE USD 0.35-0.70/kWh",
+diesel_lcoe_high,0.70,USD/kWh,,,"SEforALL Nigeria IEP (2022)",
+diesel_l_per_kwh,0.30,litres per kWh,0.25,0.40,Assumption (small gensets),Same as carbon-footprint project
+diesel_kgco2e_per_l,2.66155,kgCO2e per litre,,,"DESNZ 2026 Fuels: Diesel (100% mineral) - verified cell Fuels!D76",Combustion only; WTT upstream (0.62409) excluded = conservative
