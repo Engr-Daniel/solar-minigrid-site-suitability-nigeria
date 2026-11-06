@@ -3,7 +3,7 @@
 [![tests](https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria/actions/workflows/tests.yml/badge.svg)](https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
-📊 **[Live dashboard](https://solar-minigrid-site-suitability-nigeria.streamlit.app/)** · 📓 [Analysis notebook](notebooks/01_site_suitability.ipynb) · 📐 [Methodology](docs/methodology.md)
+🌐 **[Project website](https://engr-daniel.github.io/solar-minigrid-site-suitability-nigeria/)** · 📊 **[Live dashboard](https://solar-minigrid-site-suitability-nigeria.streamlit.app/)** · 📓 [Analysis notebook](notebooks/01_site_suitability.ipynb) · 📐 [Methodology](docs/methodology.md)
 
 **Where should Nigeria build its next solar mini-grids?** This project ranks **191,316 populated hexagons (~5 km² each)** for village-scale solar mini-grids. It uses multi-criteria decision analysis (MCDA) on population, distance to the grid, road access and solar resource, then tests how robust the ranking is and estimates site economics.
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Mini-Grid Siting · Daniel Oyewale</title>
+<meta name="description" content="A national screening of 191,316 populated areas (~5 km² each) that ranks communities for village-scale solar mini-grids, tests how robust the ranking is, and estimates cost, tariff and carbon impact.">
+<meta name="author" content="Daniel Oyewale">
+<meta property="og:type" content="website"><meta property="og:url" content="https://engr-daniel.github.io/solar-minigrid-site-suitability-nigeria/">
+<meta property="og:title" content="Where should Nigeria build its next solar mini-grids?"><meta property="og:description" content="A national screening of 191,316 populated areas (~5 km² each) that ranks communities for village-scale solar mini-grids, tests how robust the ranking is, and estimates cost, tariff and carbon impact.">
+<meta property="og:image" content="https://engr-daniel.github.io/solar-minigrid-site-suitability-nigeria/assets/dashboard.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+<style>
+:root{--a:#1d5fb4;--a2:#0d366b;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8984;--line:#e7e5e0;--bg:#fcfcfb;--card:#fff}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:Inter,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:var(--a)} img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:10;background:rgba(252,252,251,.88);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:16px}
+nav .brand{font-weight:700;color:var(--ink);text-decoration:none;white-space:nowrap}
+nav .links{display:flex;gap:20px;font-size:.92rem} nav .links a{color:var(--ink2);text-decoration:none} nav .links a:hover{color:var(--a)}
+header.hero{background:linear-gradient(125deg,var(--a2) 0%,var(--a) 70%);color:#fff;padding:64px 0 0;overflow:hidden}
+.hero .eyebrow{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.85}
+.hero h1{font-size:clamp(1.8rem,4.2vw,3rem);line-height:1.12;margin:12px 0 16px;max-width:900px;letter-spacing:-.01em}
+.hero p.lead{font-size:clamp(1rem,1.6vw,1.15rem);max-width:780px;opacity:.92;margin:0}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 40px}
+.btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn:hover{background:rgba(255,255,255,.12)} .btn.primary{background:#fff;color:var(--a2);border-color:#fff} .btn.primary:hover{background:#f1f1ee}
+.shots{position:relative;max-width:1000px;margin:0 auto}
+.shot{border-radius:14px 14px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.25);border-bottom:0}
+.phone{position:absolute;right:-18px;bottom:0;width:22%;border-radius:18px 18px 0 0;border:6px solid #111;border-bottom:0;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.note{background:#fbf7ec;border:1px solid #efe3c2;color:var(--ink2);border-radius:12px;padding:12px 16px;font-size:.9rem;margin:28px 0 0}
+section{padding:56px 0 8px} h2{font-size:1.6rem;margin:0 0 6px;letter-spacing:-.01em} .sub{color:var(--ink2);margin:0 0 24px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.kpi .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);font-weight:700}
+.kpi .v{font-size:1.9rem;font-weight:750;margin-top:8px;font-variant-numeric:tabular-nums;line-height:1.1} .kpi .v span{font-size:.95rem;font-weight:500;color:var(--ink2);margin-left:3px}
+.kpi .s{font-size:.84rem;color:var(--ink2);margin-top:6px}
+ol.finds{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px}
+ol.finds li{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+ol.finds .n{flex:0 0 30px;height:30px;border-radius:50%;background:var(--a);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+ol.finds h3{margin:0 0 4px;font-size:1rem} ol.finds p{margin:0;color:var(--ink2);font-size:.92rem}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:18px}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:hidden}
+figure img{border-radius:6px} figcaption{font-size:.88rem;color:var(--ink2);margin-top:10px}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+ol.steps li:before{content:counter(s,decimal-leading-zero);grid-row:span 2;font-weight:800;color:var(--a);font-size:1.15rem}
+ol.steps b{display:block} ol.steps span{color:var(--ink2);font-size:.92rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px} .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel h3{margin:0 0 12px;font-size:1.02rem} .panel ul{margin:0;padding-left:18px;color:var(--ink2);font-size:.92rem} .panel li{margin-bottom:5px}
+.chip{display:inline-block;font-size:.82rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);margin:0 6px 8px 0;background:#faf9f6}
+.lim{color:var(--ink2);font-size:.92rem;margin:14px 0 0}
+.others{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px}
+.other{display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;transition:border-color .15s,transform .15s}
+.other:hover{border-color:var(--a);transform:translateY(-2px)} .oi{font-size:1.8rem;line-height:1} .other b{display:block} .other em{font-style:normal;color:var(--ink2);font-size:.9rem}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:26px 0 40px;color:var(--ink3);font-size:.86rem} footer a{color:var(--ink2)}
+@media (max-width:1000px){ .kpis{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:760px){
+  nav .links a.hide-m{display:none} header.hero{padding-top:40px} .ctas{margin-bottom:28px}
+  .phone{display:none} .figs{grid-template-columns:1fr} .two{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr);gap:10px} .kpi{padding:14px} .kpi .v{font-size:1.35rem} .kpi .v span{font-size:.78rem}
+  .kpi:last-child:nth-child(odd){grid-column:span 2} nav .brand{font-size:.9rem;overflow:hidden;text-overflow:ellipsis} nav .links{gap:12px;font-size:.86rem;flex-shrink:0}
+  section{padding-top:40px}
+}
+</style></head>
+<body>
+<nav><div class="wrap"><a class="brand" href="#">☀️ Solar Mini-Grid Siting</a>
+<div class="links"><a href="#results">Results</a><a class="hide-m" href="#charts">Charts</a><a href="#method">Method</a>
+<a href="https://solar-minigrid-site-suitability-nigeria.streamlit.app/" target="_blank" rel="noopener">App ↗</a><a class="hide-m" href="https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria" target="_blank" rel="noopener">Code</a></div></div></nav>
+<header class="hero"><div class="wrap">
+<div class="eyebrow">Geospatial MCDA · Off-grid electrification · Nigeria</div><h1>Where should Nigeria build its next solar mini-grids?</h1><p class="lead">A national screening of 191,316 populated areas (~5 km² each) that ranks communities for village-scale solar mini-grids, tests how robust the ranking is, and estimates cost, tariff and carbon impact.</p>
+<div class="ctas"><a class="btn primary" href="https://solar-minigrid-site-suitability-nigeria.streamlit.app/" target="_blank" rel="noopener">Open the live app ↗</a><a class="btn" href="https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria" target="_blank" rel="noopener">View the code</a></div>
+<div class="shots"><img class="shot" src="assets/dashboard.png" alt="Dashboard screenshot"><img class="phone" src="assets/dashboard_mobile.png" alt="Mobile view"></div></div></header>
+<main class="wrap">
+<div class="note">⚖️ Screening analysis: settlement, grid and road layers come from the 2016 World Bank ESMAP / KTH OnSSET model, with population projected to 2030. Shortlisted sites need field verification.</div>
+<section id="results"><h2>Key results</h2><p class="sub">The headline numbers.</p><div class="kpis"><div class="kpi"><div class="l">Eligible areas</div><div class="v">33,138<span></span></div><div class="s">800–10,000 people, rural, ≥5 km from grid</div></div><div class="kpi"><div class="l">Top 100 serve</div><div class="v">~759k<span> people</span></div><div class="s">~98,000 connections</div></div><div class="kpi"><div class="l">Solar needed</div><div class="v">27.6<span> MWp</span></div><div class="s">~$77M capex · ~$790/connection</div></div><div class="kpi"><div class="l">Cost of power</div><div class="v">$0.26<span>/kWh</span></div><div class="s">vs $0.35–0.70 diesel · $0.18 with grant</div></div><div class="kpi"><div class="l">CO₂ avoided</div><div class="v">~37<span> kt/yr</span></div><div class="s">vs diesel generators</div></div></div></section>
+<section><h2>What the analysis shows</h2><p class="sub">Findings, and what they mean for decision-makers.</p><ol class="finds"><li><div class="n">1</div><div><h3>The north is the sweet spot</h3><p>Katsina, Bauchi and Zamfara hold 70% of the top 100: compact villages a median 69 km from the grid, under the strongest sun (~2,240 kWh/m²/yr).</p></div></li><li><div class="n">2</div><div><h3>Solar mini-grids beat diesel at screening level</h3><p>The central cost of $0.26/kWh (range $0.14–0.60) is about 25–60% below diesel generation, even before grants.</p></div></li><li><div class="n">3</div><div><h3>The ranking is robust</h3><p>60% of sites stay in the top 100 in at least 80% of 1,000 random weightings. The Balanced and Developer lenses share 85 of 100 sites.</p></div></li><li><div class="n">4</div><div><h3>The 2016 model disagrees, as expected</h3><p>OnSSET-2016 used 2016 PV costs. Newer modelling (SEforALL IEP 2022) backs mini-grids in dense, remote settlements, and a conservative shortlist is included.</p></div></li></ol></section>
+<section id="charts"><h2>Charts</h2><p class="sub">Click any chart to open it full size.</p><div class="figs"><figure><a href="assets/01_suitability_map.png" target="_blank"><img src="assets/01_suitability_map.png" alt="Suitability of eligible areas, with the top 100 sites"></a><figcaption>Suitability of eligible areas, with the top 100 sites</figcaption></figure><figure><a href="assets/02_criteria_layers.png" target="_blank"><img src="assets/02_criteria_layers.png" alt="Input layers: population, grid distance, solar, roads"></a><figcaption>Input layers: population, grid distance, solar, roads</figcaption></figure><figure><a href="assets/03_scenarios_by_state.png" target="_blank"><img src="assets/03_scenarios_by_state.png" alt="Shortlist by state under three stakeholder lenses"></a><figcaption>Shortlist by state under three stakeholder lenses</figcaption></figure><figure><a href="assets/05_lcoe_vs_diesel.png" target="_blank"><img src="assets/05_lcoe_vs_diesel.png" alt="Cost of electricity: solar mini-grid vs diesel"></a><figcaption>Cost of electricity: solar mini-grid vs diesel</figcaption></figure><figure><a href="assets/04_onsset_benchmark.png" target="_blank"><img src="assets/04_onsset_benchmark.png" alt="Benchmark against the World Bank/KTH OnSSET model"></a><figcaption>Benchmark against the World Bank/KTH OnSSET model</figcaption></figure></div></section>
+<section id="method"><h2>How it works</h2><p class="sub">Full methodology, tests and code are on <a href="https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria" target="_blank" rel="noopener">GitHub</a>.</p>
+<ol class="steps"><li><b>Open national data</b><span>World Bank/KTH OnSSET 1 km layer (934,595 cells), transmission lines, geoBoundaries</span></li><li><b>H3 hexagons</b><span>Cells aggregated to H3 resolution 7, about the area a village mini-grid serves</span></li><li><b>Multi-criteria scoring</b><span>Eligibility screen + 7 criteria, weighted linear combination, three stakeholder lenses</span></li><li><b>Robustness</b><span>Dirichlet Monte Carlo over the weights, plus a de-duplicated shortlist</span></li><li><b>Economics</b><span>MTF Tier 3 demand, PV sizing from GHI, capex, LCOE with and without grant, CO₂ avoided</span></li></ol>
+<div class="two" style="margin-top:18px"><div class="panel"><h3>Tech stack</h3><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">GeoPandas</span><span class="chip">H3</span><span class="chip">pydeck</span><span class="chip">Plotly</span><span class="chip">Streamlit</span><span class="chip">pytest</span><span class="chip">GitHub Actions</span></div>
+<div class="panel"><h3>Data &amp; references</h3><ul><li>World Bank ESMAP &amp; KTH-dESA OnSSET Nigeria layer (MIT)</li><li>geoBoundaries (CC BY 4.0)</li><li>ESMAP (2019) Mini Grids for Half a Billion People</li><li>SEforALL / REA Nigeria Integrated Energy Plan (2022)</li><li>World Bank Multi-Tier Framework · NBS NLSS 2020</li><li>UK DESNZ 2026 diesel factor</li></ul></div></div>
+<p class="lim"><b>Limitations:</b> 2016 settlement, grid and road layers · 2030 population projection · annual GHI only · screening-level economics (no dispatch modelling) · no willingness-to-pay or security data.</p></section>
+<section><h2>More projects</h2><p class="sub">Part of a data, strategy and sustainability portfolio.</p><div class="others"><a class="other" href="https://engr-daniel.github.io/carbon-footprint-esg-dashboard/"><span class="oi">🌍</span><span><b>Carbon Footprint &amp; ESG</b><em>How big is a Nigerian manufacturer&#x27;s carbon footprint, and what will it cost to cut it?</em></span></a><a class="other" href="https://engr-daniel.github.io/greenwashing-detector-esg-reports/"><span class="oi">🔎</span><span><b>Greenwashing Detector</b><em>Are a company&#x27;s climate claims specific enough to verify?</em></span></a></div></section>
+</main>
+<footer><div class="wrap">Built by <b>Daniel Oyewale</b>, Data Analyst · Data Strategist · Sustainability Researcher at
+<a href="https://petgrave.io" target="_blank" rel="noopener">Petgrave.io</a> · <a href="https://github.com/Engr-Daniel" target="_blank" rel="noopener">GitHub</a> ·
+<a href="https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria" target="_blank" rel="noopener">Source code</a> (MIT)</div></footer>
+</body></html>

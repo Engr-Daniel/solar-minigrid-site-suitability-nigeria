@@ -227,3 +227,6 @@ data/interim/*
 .env
 .streamlit/secrets.toml
 .DS_Store
+
+# GitHub Pages project website
+!site/
