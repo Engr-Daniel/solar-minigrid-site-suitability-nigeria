@@ -37,7 +37,7 @@ st.set_page_config(page_title="Solar mini-grid siting, Nigeria", page_icon=str(P
                    initial_sidebar_state="auto")
 st.markdown(f"""
 <style>
-  .block-container {{padding-top: 1.6rem; padding-bottom: 3rem; max-width: 1400px;}}
+  .block-container {{padding-top: 4.6rem; padding-bottom: 3rem; max-width: 1400px;}}
   h1, h2, h3, h4 {{font-family: "Bricolage Grotesque", sans-serif; letter-spacing: -0.02em;}}
   [data-testid="stSidebar"] .sb-h {{font-family:"Bricolage Grotesque"; font-size:1rem; font-weight:700; color:{NAVY};
       margin:22px 0 4px 0; padding-top:12px; border-top:1px solid {BORDER};}}
@@ -98,7 +98,7 @@ st.markdown(f"""
   div[data-testid="stTabs"] button p {{font-size:0.98rem; font-weight:600;}}
   div[data-testid="stTabs"] button[aria-selected="true"] {{background:{SKY}; border-radius:8px 8px 0 0;}}
   @media (max-width: 768px) {{
-    .block-container {{padding-left:0.8rem; padding-right:0.8rem; padding-top:3.2rem;}}
+    .block-container {{padding-left:0.8rem; padding-right:0.8rem; padding-top:4rem;}}
     .hero {{padding:20px 18px;}} .hero h1 {{font-size:1.6rem;}} .hero p {{font-size:0.9rem;}}
     .funnel {{gap:8px 22px;}} .funnel div b {{font-size:1.5rem;}} .funnel i {{display:none;}}
     .kpis {{grid-template-columns:repeat(2, 1fr); gap:14px;}} .kpi {{min-height:0;}} .kpi .value {{font-size:1.45rem;}}
