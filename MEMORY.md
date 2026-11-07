@@ -3,7 +3,7 @@
 Long-term project memory: context, decisions and lessons. Newest decisions first.
 
 ## Context
-- **Owner:** Daniel Oyewale (Petgrave.io). Portfolio project 3 of 3. Project 1 = carbon-footprint-esg-dashboard; project 2 (Petgrave Data Strategy Blueprint case study) is paused.
+- **Owner:** Daniel Oyewale (personal portfolio project; no employer affiliation in this repo). Portfolio project 3 of 3. Project 1 = carbon-footprint-esg-dashboard; project 2 (data-strategy case studies) is paused.
 - **Question:** which Nigerian communities suit village-scale solar mini-grids, and how robust is the ranking?
 - **Build constraints:** the session could reach only GitHub-hosted data (HDX, WorldPop, NASA, GSA and OSM mirrors were blocked). That led to the World Bank/KTH OnSSET layer on GitHub (MIT) plus geoBoundaries via media.githubusercontent.com.
 
@@ -17,6 +17,7 @@ Long-term project memory: context, decisions and lessons. Newest decisions first
 ## Decision log
 | Date | Decision | Reason |
 |---|---|---|
+| 2026-11-07 | Own visual identity for app and site: Bricolage Grotesque + Instrument Sans, pale sky/deep blue/sun yellow, screening-funnel header. Fonts self-hosted (app/static, site/assets/fonts, SIL OFL) | Owner: each project must look distinct, not like a generic template; personal project, so no employer branding |
 | 2026-11-05 | Dashboard restructured as a stakeholder deck: Executive summary → Investment case → Site explorer → Robustness → Method; printable briefing note | Owner asked for presentation-grade, professional view |
 | 2026-11-05 | Mobile: KPI CSS grid (2-up), sidebar `auto`, map zoom/height switched by User-Agent (`st.context.headers`) | pydeck has no fit-bounds; Streamlit columns stack on phones |
 | 2026-11-05 | Core data = World Bank/KTH OnSSET Nigeria 1 km cells (566-<state>.json; LGA files are subsets) | Open, MIT, consistent national layer with population, grid/road distance and GHI. Vintage 2016 is disclosed |

@@ -21,8 +21,9 @@ from minigrid.mcda import (Screen, agreement_with_onsset, load_criteria, load_he
 from minigrid.paths import GRID_EXISTING, GRID_PLANNED, STATES  # noqa: E402
 
 # ----------------------------------------------------------------------------- design tokens
-INK, INK2, INK3, BORDER, GRID, SURFACE = "#0b0b0b", "#52514e", "#8a8984", "#e7e5e0", "#ecebe7", "#ffffff"
-BLUE, ORANGE, AQUA, NAVY = "#2a78d6", "#eb6834", "#1baf7a", "#0d366b"
+INK, INK2, INK3, BORDER, GRID, SURFACE = "#1a2735", "#566576", "#8796a8", "#cfdbe8", "#e6edf5", "#ffffff"
+BLUE, ORANGE, AQUA, NAVY = "#2a78d6", "#eb6834", "#1baf7a", "#0f2b4c"
+SKY, SUN = "#eef4fa", "#f4b400"
 RAMP = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]  # one-hue sequential
 REPO = "https://github.com/Engr-Daniel/solar-minigrid-site-suitability-nigeria"
 CRIT_LABEL = {"demand": "Demand (population)", "compactness": "Settlement compactness",
@@ -32,93 +33,81 @@ DIESEL = (0.35, 0.70)
 DEFAULTS = {"pop_rng": (800, 10000), "min_grid": 5, "max_urban": 0.5, "states": [], "conservative": False,
             "n_top": 100}
 
-st.set_page_config(page_title="Solar Mini-Grid Siting · Nigeria", page_icon="☀️", layout="wide",
+st.set_page_config(page_title="Solar mini-grid siting, Nigeria", page_icon=str(Path(__file__).parent / "static" / "favicon.png"), layout="wide",
                    initial_sidebar_state="auto")
 st.markdown(f"""
 <style>
-  .block-container {{padding-top: 1.4rem; padding-bottom: 3rem; max-width: 1400px;}}
-  [data-testid="stSidebar"] {{border-right: 1px solid {BORDER};}}
-  [data-testid="stSidebar"] .sb-h {{font-size:0.7rem; font-weight:700; letter-spacing:0.08em; color:{INK3};
-      text-transform:uppercase; margin:18px 0 4px 0;}}
-  .hero {{background: linear-gradient(120deg, {NAVY} 0%, #184f95 62%, #256abf 100%); color:#fff;
-          border-radius:18px; padding:26px 30px 22px 30px; margin-bottom:18px; position:relative; overflow:hidden;}}
-  .hero:after {{content:""; position:absolute; right:-60px; top:-80px; width:300px; height:300px; border-radius:50%;
-          background: radial-gradient(circle, rgba(255,214,102,0.55) 0%, rgba(255,214,102,0) 68%);}}
-  .hero .eyebrow {{font-size:0.74rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.8; font-weight:600;}}
-  .hero h1 {{color:#fff; font-size:2.05rem; line-height:1.2; margin:6px 0 8px 0; padding:0; font-weight:700;}}
-  .hero p {{color:rgba(255,255,255,0.86); margin:0; font-size:1.0rem; max-width:860px; line-height:1.5;}}
-  .hero .meta {{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}}
-  .hero .chip {{font-size:0.76rem; padding:4px 11px; border-radius:999px; background:rgba(255,255,255,0.12);
-          border:1px solid rgba(255,255,255,0.22); color:#fff;}}
-  .hero .chip.warn {{background:rgba(255,214,102,0.18); border-color:rgba(255,214,102,0.5);}}
-  .kpis {{display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:6px;}}
-  .kpi {{background:{SURFACE}; border:1px solid {BORDER}; border-radius:14px; padding:16px 18px 14px 18px;
-         min-height:128px; box-shadow:0 1px 2px rgba(16,24,40,0.04);}}
-  .kpi .label {{font-size:0.7rem; color:{INK2}; text-transform:uppercase; letter-spacing:0.07em; font-weight:700;}}
-  .kpi .value {{font-size:1.85rem; font-weight:700; color:{INK}; line-height:1.15; margin-top:8px;
-         font-variant-numeric: tabular-nums;}}
-  .kpi .unit {{font-size:0.92rem; font-weight:500; color:{INK2}; margin-left:2px;}}
-  .kpi .sub {{font-size:0.8rem; color:{INK2}; margin-top:6px; line-height:1.35;}}
-  .headline {{font-size:1.12rem; line-height:1.55; color:{INK}; background:{SURFACE}; border:1px solid {BORDER};
-         border-left:5px solid {ORANGE}; border-radius:12px; padding:14px 18px; margin:4px 0 16px 0;}}
-  .card {{background:{SURFACE}; border:1px solid {BORDER}; border-radius:14px; padding:16px 18px; height:100%;
-          box-shadow:0 1px 2px rgba(16,24,40,0.04);}}
-  .card h4 {{margin:0 0 10px 0; padding:0; font-size:0.98rem;}}
-  .card .muted {{color:{INK2}; font-size:0.84rem; line-height:1.5;}}
-  .msg {{display:flex; gap:12px; align-items:flex-start; margin-bottom:12px;}}
-  .msg .n {{flex:0 0 26px; height:26px; border-radius:50%; background:{NAVY}; color:#fff; font-weight:700;
-         font-size:0.8rem; display:flex; align-items:center; justify-content:center;}}
-  .msg .t {{font-weight:700; font-size:0.92rem; color:{INK};}}
-  .msg .b {{font-size:0.85rem; color:{INK2}; line-height:1.45;}}
-  table.rank {{width:100%; border-collapse:collapse; font-size:0.83rem; font-variant-numeric: tabular-nums;}}
-  table.rank th {{text-align:left; color:{INK3}; font-weight:600; font-size:0.7rem; text-transform:uppercase;
-         letter-spacing:0.05em; padding:0 6px 6px 0; border-bottom:1px solid {BORDER};}}
+  .block-container {{padding-top: 1.6rem; padding-bottom: 3rem; max-width: 1400px;}}
+  h1, h2, h3, h4 {{font-family: "Bricolage Grotesque", sans-serif; letter-spacing: -0.02em;}}
+  [data-testid="stSidebar"] .sb-h {{font-family:"Bricolage Grotesque"; font-size:1rem; font-weight:700; color:{NAVY};
+      margin:22px 0 4px 0; padding-top:12px; border-top:1px solid {BORDER};}}
+  .hero {{background:{SKY}; border-radius:10px; padding:30px 34px 26px; margin-bottom:22px;}}
+  .hero h1 {{color:{NAVY}; font-size:clamp(1.7rem, 3.4vw, 2.8rem); font-stretch:88%; line-height:1.02; margin:0 0 12px;
+            padding:0; font-weight:800; letter-spacing:-.02em; max-width:24ch;}}
+  .hero p {{color:{INK2}; margin:0; font-size:1rem; max-width:78ch; line-height:1.55;}}
+  .funnel {{display:flex; align-items:flex-start; gap:18px; margin-top:24px; flex-wrap:wrap;}}
+  .funnel div b {{display:block; font-family:"Bricolage Grotesque"; font-size:2.1rem; font-weight:700; color:{NAVY};
+                 letter-spacing:-.03em; line-height:1;}}
+  .funnel div span {{font-size:.86rem; color:{INK2};}}
+  .funnel div:last-of-type b {{color:#2f7d4a;}}
+  .funnel i {{width:36px; height:2px; background:{SUN}; margin-top:18px; position:relative;}}
+  .funnel i:after {{content:""; position:absolute; right:-1px; top:-5px; border:6px solid transparent; border-left:9px solid {SUN};}}
+  .ctx {{font-size:.86rem; color:{INK2}; margin-top:18px;}} .ctx b {{color:{NAVY};}}
+  .kpis {{display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:22px; margin-bottom:10px;}}
+  .kpi {{border-top:3px solid {SUN}; padding:12px 0 6px; min-height:118px;}}
+  .kpi .label {{font-size:0.88rem; color:{NAVY}; font-weight:600;}}
+  .kpi .value {{font-family:"Bricolage Grotesque"; font-size:2rem; font-weight:700; color:{NAVY}; line-height:1.1;
+               margin-top:6px; letter-spacing:-.02em; font-variant-numeric: tabular-nums;}}
+  .kpi .unit {{font-family:"Instrument Sans"; font-size:0.9rem; font-weight:500; color:{INK2}; margin-left:3px; letter-spacing:0;}}
+  .kpi .sub {{font-size:0.82rem; color:{INK2}; margin-top:4px; line-height:1.4;}}
+  .headline {{font-family:"Bricolage Grotesque"; font-size:1.3rem; line-height:1.4; color:{NAVY}; font-weight:500;
+             margin:8px 0 22px; max-width:72ch; letter-spacing:-.01em;}}
+  .card {{background:#fff; border:1px solid {BORDER}; border-radius:10px; padding:18px 20px; height:100%;}}
+  .card h4 {{margin:0 0 12px 0; padding:0; font-size:1.08rem; color:{NAVY};}}
+  .card .muted {{color:{INK2}; font-size:0.88rem; line-height:1.5;}}
+  .msg {{display:flex; gap:12px; align-items:flex-start; margin-bottom:14px;}}
+  .msg .n {{flex:0 0 10px; width:10px; height:10px; border-radius:50%; background:{SUN}; font-size:0; margin-top:7px;}}
+  .msg .t {{font-weight:700; font-size:0.95rem; color:{NAVY};}}
+  .msg .b {{font-size:0.88rem; color:{INK2}; line-height:1.45;}}
+  table.rank {{width:100%; border-collapse:collapse; font-size:0.85rem; font-variant-numeric: tabular-nums;}}
+  table.rank th {{text-align:left; color:{INK2}; font-weight:600; font-size:0.8rem; padding:0 6px 6px 0; border-bottom:1px solid {BORDER};}}
   table.rank td {{padding:7px 6px 7px 0; border-bottom:1px solid {GRID}; color:{INK};}}
   table.rank td.r {{text-align:right;}} table.rank th.r {{text-align:right;}}
-  .pill {{display:inline-flex; width:22px; height:22px; border-radius:50%; background:{ORANGE}; color:#fff;
+  .pill {{display:inline-flex; width:22px; height:22px; border-radius:50%; background:{NAVY}; color:#fff;
          font-weight:700; font-size:0.72rem; align-items:center; justify-content:center;}}
   .bar {{height:6px; background:{GRID}; border-radius:4px; width:64px; display:inline-block; vertical-align:middle;}}
   .bar > span {{display:block; height:6px; background:{BLUE}; border-radius:4px;}}
-  .legend {{display:flex; flex-wrap:wrap; gap:18px; align-items:center; font-size:0.8rem; color:{INK2};
-         padding:10px 2px 0 2px;}}
+  .legend {{display:flex; flex-wrap:wrap; gap:18px; align-items:center; font-size:0.82rem; color:{INK2}; padding:10px 2px 0 2px;}}
   .legend .ramp span {{display:inline-block; width:20px; height:10px;}}
   .legend .ramp span:first-child {{border-radius:3px 0 0 3px;}} .legend .ramp span:last-child {{border-radius:0 3px 3px 0;}}
   .legend .dot {{display:inline-block; width:11px; height:11px; border-radius:50%; background:{ORANGE};
          border:1.5px solid #fff; box-shadow:0 0 0 1px {ORANGE}; vertical-align:-1px; margin-right:4px;}}
-  .legend .ln {{display:inline-block; width:22px; height:0; border-top:2px solid {INK}; vertical-align:middle;
-         margin-right:4px;}}
+  .legend .ln {{display:inline-block; width:22px; height:0; border-top:2px solid {INK}; vertical-align:middle; margin-right:4px;}}
   .legend .ln.p {{border-top:2px dashed {INK3};}}
-  .sec {{font-size:1.18rem; font-weight:700; color:{INK}; margin:22px 0 2px 0;}}
-  .sec-sub {{font-size:0.88rem; color:{INK2}; margin:0 0 12px 0;}}
-  .foot {{border-top:1px solid {BORDER}; margin-top:34px; padding-top:14px; font-size:0.78rem; color:{INK3};
-         line-height:1.6;}}
-  .foot a {{color:{INK2};}}
+  .sec {{font-family:"Bricolage Grotesque"; font-size:1.4rem; font-weight:700; color:{NAVY}; margin:30px 0 2px 0; letter-spacing:-.015em;}}
+  .sec-sub {{font-size:0.9rem; color:{INK2}; margin:0 0 14px 0;}}
+  .foot {{margin-top:40px; padding:16px 0 0; border-top:1px solid {BORDER}; font-size:0.84rem; color:{INK2}; line-height:1.6;}}
+  .foot a {{color:{NAVY};}}
   table.rank, table.rank tr, table.rank td, table.rank th {{border-left:none !important; border-right:none !important;
          border-top:none !important; background:transparent !important;}}
   table.rank td {{padding:6px 6px 6px 0 !important; border-bottom:1px solid {GRID} !important; line-height:1.25;}}
   table.rank th {{padding:0 6px 6px 0 !important; border-bottom:1px solid {BORDER} !important;}}
   .mobile-hint {{display:none;}}
+  div[data-testid="stTabs"] [data-baseweb="tab-list"] {{gap:4px; border-bottom:1px solid {BORDER};}}
+  div[data-testid="stTabs"] button {{padding:10px 14px;}}
+  div[data-testid="stTabs"] button p {{font-size:0.98rem; font-weight:600;}}
+  div[data-testid="stTabs"] button[aria-selected="true"] {{background:{SKY}; border-radius:8px 8px 0 0;}}
   @media (max-width: 768px) {{
     .block-container {{padding-left:0.8rem; padding-right:0.8rem; padding-top:3.2rem;}}
-    .hero {{padding:18px 18px 16px 18px; border-radius:14px;}}
-    .hero h1 {{font-size:1.4rem;}}
-    .hero p {{font-size:0.9rem;}}
-    .hero:after {{width:180px; height:180px; right:-50px; top:-60px;}}
-    .kpis {{grid-template-columns:repeat(2, 1fr); gap:8px;}}
-    .kpi {{min-height:0; padding:12px 12px 10px 12px;}}
-    .kpi .value {{font-size:1.4rem;}}
-    .kpi .sub {{font-size:0.74rem;}}
-    .headline {{font-size:0.98rem; padding:12px 14px;}}
-    .legend {{gap:10px; font-size:0.74rem;}}
-    .mobile-hint {{display:block; font-size:0.78rem; margin-top:12px; opacity:0.9;}}
+    .hero {{padding:20px 18px;}} .hero h1 {{font-size:1.6rem;}} .hero p {{font-size:0.9rem;}}
+    .funnel {{gap:8px 22px;}} .funnel div b {{font-size:1.5rem;}} .funnel i {{display:none;}}
+    .kpis {{grid-template-columns:repeat(2, 1fr); gap:14px;}} .kpi {{min-height:0;}} .kpi .value {{font-size:1.45rem;}}
+    .kpi .sub {{font-size:0.76rem;}} .headline {{font-size:1.05rem;}} .legend {{gap:10px; font-size:0.76rem;}}
+    .mobile-hint {{display:block; font-size:0.82rem; margin-top:12px; color:{INK2};}}
     div[data-testid="stTabs"] [data-baseweb="tab-list"] {{overflow-x:auto; flex-wrap:nowrap;}}
-    div[data-testid="stTabs"] button {{padding:8px 8px; white-space:nowrap;}}
-    div[data-testid="stTabs"] button p {{font-size:0.85rem;}}
-    .sec {{font-size:1.05rem;}}
+    div[data-testid="stTabs"] button {{padding:8px 8px; white-space:nowrap;}} div[data-testid="stTabs"] button p {{font-size:0.86rem;}}
+    .sec {{font-size:1.15rem;}}
   }}
-  div[data-testid="stTabs"] [data-baseweb="tab-list"] {{gap:6px; border-bottom:1px solid {BORDER};}}
-  div[data-testid="stTabs"] button {{padding:10px 14px;}}
-  div[data-testid="stTabs"] button p {{font-size:0.95rem; font-weight:600;}}
 </style>""", unsafe_allow_html=True)
 
 
@@ -153,9 +142,9 @@ def colour_by_score(s: pd.Series):
 def style(fig, title, sub=None, height=340, legend=False):
     fig.update_layout(
         title=dict(text=f"<b>{title}</b>" + (f"<br><span style='font-size:12px;color:{INK2};font-weight:400'>{sub}</span>" if sub else ""),
-                   x=0, xanchor="left", y=0.97, font=dict(size=15, color=INK)),
+                   x=0, xanchor="left", y=0.97, font=dict(family="Bricolage Grotesque, sans-serif", size=16, color=NAVY)),
         height=height, margin=dict(l=6, r=24, t=72 if sub else 48, b=8),
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(color=INK2, size=12),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(family="Instrument Sans, sans-serif", color=INK2, size=12),
         hoverlabel=dict(bgcolor="white", bordercolor=BORDER, font=dict(color=INK, size=12)),
         showlegend=legend, legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, title=None),
         barcornerradius=4)
@@ -219,9 +208,9 @@ def reset():
 
 
 with st.sidebar:
-    st.markdown("### ☀️ Scenario controls")
+    st.markdown("### Scenario controls")
     st.caption("Change the priorities and screen; every view updates.")
-    st.markdown('<div class="sb-h">1 · Priorities</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sb-h">Priorities</div>', unsafe_allow_html=True)
     scen = st.selectbox("Weighting scenario", list(W.index), help="Preset stakeholder lenses. Fine-tune below.")
     base_w = W.loc[scen].drop("description").astype(float)
     st.caption(W.loc[scen, "description"])
@@ -231,7 +220,7 @@ with st.sidebar:
     if sum(weights.values()) == 0:
         st.error("Set at least one weight above zero.")
         st.stop()
-    st.markdown('<div class="sb-h">2 · Eligibility screen</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sb-h">Eligibility screen</div>', unsafe_allow_html=True)
     pop_rng = st.slider("Population per site (2030)", 200, 30000, step=100, key="pop_rng")
     min_grid = st.slider("Min. distance to existing grid (km)", 0, 50, key="min_grid")
     max_urban = st.slider("Max. urban share", 0.0, 1.0, step=0.1, key="max_urban")
@@ -239,12 +228,12 @@ with st.sidebar:
                             placeholder="All 37 states")
     conservative = st.toggle("Conservative mode", key="conservative",
                              help="Only keep sites where the 2016 World Bank/KTH OnSSET model also chose a mini-grid.")
-    st.markdown('<div class="sb-h">3 · Portfolio</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sb-h">Portfolio</div>', unsafe_allow_html=True)
     n_top = st.select_slider("Shortlist size", [25, 50, 100, 200], key="n_top")
-    st.button("↺ Reset to defaults", on_click=reset, width="stretch")
+    st.button("Reset to defaults", on_click=reset, width="stretch")
     st.divider()
-    st.link_button("Code & methodology on GitHub", REPO, width="stretch")
-    st.caption("Built by **Daniel Oyewale** · Data & Sustainability, Petgrave.io")
+    st.link_button("Code and methodology", REPO, width="stretch")
+    st.caption("Daniel Oyewale")
 
 screen_items = tuple(sorted({"min_pop": pop_rng[0], "max_pop": pop_rng[1], "min_grid_km": float(min_grid),
                              "max_urban_share": float(max_urban)}.items()))
@@ -266,20 +255,17 @@ robust_share = (top.robust >= 0.8).mean()
 
 # ----------------------------------------------------------------------------- hero
 scope = ", ".join(states) if states else "All 37 states"
-st.markdown(f"""
-<div class="hero">
-  <div class="eyebrow">Nigeria · Off-grid electrification · Site prioritisation</div>
+st.markdown(f"""<div class="hero">
   <h1>Where should Nigeria build its next solar mini-grids?</h1>
-  <p>A national screening of {len(HEX):,} populated areas (~5 km² each) ranks the communities where a
-     village-scale solar mini-grid makes the most sense. It weighs population, distance from the grid, road access and
-     solar resource, then estimates cost, tariff and carbon impact for the shortlist.</p>
-  <div class="meta">
-    <span class="chip">Scenario: <b>{html.escape(scen)}</b>{' · conservative' if conservative else ''}</span>
-    <span class="chip">Scope: {html.escape(scope)}</span>
-    <span class="chip">Shortlist: top {len(top)} sites</span>
-    <span class="chip warn">Screening analysis · 2016 settlement data, 2030 population</span>
-  </div>
-  <div class="mobile-hint">Tap <b>›</b> at the top left to change the scenario and filters.</div>
+  <p>Every populated area in Nigeria, about 5 km² each, is screened and ranked for a village-scale solar mini-grid on
+     population, distance from the grid, road access and sunshine. The shortlist gets an estimated cost, tariff and
+     carbon saving.</p>
+  <div class="funnel"><div><b>{len(HEX):,}</b><span>populated areas</span></div><i></i>
+    <div><b>{len(cand):,}</b><span>pass the screen</span></div><i></i>
+    <div><b>{len(top)}</b><span>shortlisted sites</span></div></div>
+  <div class="ctx">Showing <b>{html.escape(scen)}</b> priorities{', conservative mode' if conservative else ''}, {html.escape(scope)}.
+     Screening analysis on 2016 settlement data with 2030 population.</div>
+  <div class="mobile-hint">Open the menu at the top left to change priorities and filters.</div>
 </div>""", unsafe_allow_html=True)
 
 t_exec, t_inv, t_sites, t_rob, t_meth = st.tabs(
@@ -656,16 +642,12 @@ text-transform:uppercase}} table{{border-collapse:collapse;width:100%;font-size:
 <th>PV kWp</th><th>Capex</th><th>LCOE</th></tr>{rows}</table>
 <div class="note">Screening analysis. Settlement, grid and road data: World Bank ESMAP / KTH-dESA OnSSET Nigeria layer (2016),
 population projected to 2030. Economics are indicative. Shortlisted sites require field verification.
-Method and code: {REPO}. Prepared by Daniel Oyewale, Petgrave.io.</div></body></html>"""
+Method and code: {REPO}. Prepared by Daniel Oyewale.</div></body></html>"""
 
 
 with st.sidebar:
     st.download_button("⬇ Briefing note (HTML, print to PDF)", briefing_html().encode(), "minigrid_briefing_note.html",
                        "text/html", width="stretch")
 
-st.markdown(f"""<div class="foot">
-<b>Sources:</b> World Bank ESMAP &amp; KTH-dESA OnSSET Nigeria electrification layer (2016, MIT) · geoBoundaries (CC BY 4.0) ·
-ESMAP <i>Mini Grids for Half a Billion People</i> (2019) · SEforALL/REA Nigeria Integrated Energy Plan (2022) ·
-UK DESNZ GHG conversion factors 2026.<br>
-Screening analysis for prioritisation only; results are not a substitute for site feasibility studies. ·
-<a href="{REPO}">Code &amp; methodology</a> · Built by Daniel Oyewale, Petgrave.io</div>""", unsafe_allow_html=True)
+st.markdown(f"""<div class="foot">Screening analysis for prioritisation, not a substitute for site feasibility
+studies. Sources are listed under Method &amp; data. <a href="{REPO}">Source code</a></div>""", unsafe_allow_html=True)

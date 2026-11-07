@@ -1,10 +1,31 @@
 [theme]
 base = "light"
-primaryColor = "#2a78d6"
-backgroundColor = "#fcfcfb"
-secondaryBackgroundColor = "#f3f2ef"
-textColor = "#0b0b0b"
-font = "sans serif"
+primaryColor = "#0f2b4c"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#eef4fa"
+textColor = "#1a2735"
+borderColor = "#cfdbe8"
+baseRadius = "medium"
+font = "Instrument Sans, sans-serif"
+headingFont = "Bricolage Grotesque, sans-serif"
+
+[[theme.fontFaces]]
+family = "Instrument Sans"
+url = "app/static/instrument-sans-latin-standard-normal.woff2"
+weight = "400 700"
+style = "normal"
+
+[[theme.fontFaces]]
+family = "Bricolage Grotesque"
+url = "app/static/bricolage-grotesque-latin-standard-normal.woff2"
+weight = "200 800"
+style = "normal"
+
+[theme.sidebar]
+backgroundColor = "#eef4fa"
+
+[server]
+enableStaticServing = true
 
 [client]
 toolbarMode = "minimal"

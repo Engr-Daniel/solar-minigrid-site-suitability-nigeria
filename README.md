@@ -94,4 +94,4 @@ python src/minigrid/ingest.py && python src/minigrid/hexes.py && python src/mini
 - UK DESNZ 2026 GHG conversion factors (diesel 2.66155 kgCO₂e/L)
 
 ## 👤 Author
-**Daniel Oyewale**, Data Analyst · Data Strategist · Sustainability Researcher at [Petgrave.io](https://petgrave.io). Companion project: [Carbon Footprint & ESG Dashboard](https://github.com/Engr-Daniel/carbon-footprint-esg-dashboard).
+**Daniel Oyewale**, data analyst, data strategist and sustainability researcher. Companion project: [Carbon Footprint & ESG Dashboard](https://github.com/Engr-Daniel/carbon-footprint-esg-dashboard).

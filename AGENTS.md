@@ -3,7 +3,7 @@
 Instructions for AI coding agents and human collaborators working in this repository.
 
 ## Project at a glance
-A geospatial multi-criteria analysis that ranks Nigerian settlements (H3 hexagons) for village-scale solar mini-grids, plus a Streamlit dashboard. It is a portfolio project by Daniel Oyewale (Petgrave.io).
+A geospatial multi-criteria analysis that ranks Nigerian settlements (H3 hexagons) for village-scale solar mini-grids, plus a Streamlit dashboard. It is a personal portfolio project by Daniel Oyewale.
 
 **Read `MEMORY.md` (context & decisions) and `TASK.md` (priorities) before starting work.**
 
